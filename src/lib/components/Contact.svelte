@@ -651,9 +651,7 @@
     color: var(--text-muted);
   }
 
-  .accent {
-    color: var(--accent);
-  }
+
 
   /* ── Responsive ── */
   @media (max-width: 900px) {
