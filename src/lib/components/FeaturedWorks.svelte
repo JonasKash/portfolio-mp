@@ -91,6 +91,7 @@
                 muted 
                 loop 
                 playsinline
+                loading="lazy"
                 class="card-vid-el"
               ></video>
             </div>
@@ -231,6 +232,7 @@
     cursor: none;
     background: var(--bg-2);
     transition: border-color 0.4s ease;
+    will-change: transform, border-color;
   }
 
   .project-card:hover {

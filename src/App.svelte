@@ -8,6 +8,7 @@
   import Hero from '$lib/components/Hero.svelte';
   import Marquee from '$lib/components/Marquee.svelte';
   import FeaturedWorks from '$lib/components/FeaturedWorks.svelte';
+  import CreativeArsenal from '$lib/components/CreativeArsenal.svelte';
   import Contact from '$lib/components/Contact.svelte';
   import CaseStudy from '$lib/components/CaseStudy.svelte';
 
@@ -34,7 +35,7 @@
           ScrollTrigger.refresh();
         }
       });
-    }, 1200);
+    }, 600);
 
     return () => clearTimeout(timer);
   });
@@ -100,15 +101,17 @@
   }
 </script>
 
-<!-- Loading Screen -->
-<div bind:this={loadingScreen} class="loading-screen" aria-hidden="true">
-  <div class="loading-inner">
-    <div class="loading-logo">MP</div>
-    <div class="loading-bar">
-      <div class="loading-progress"></div>
+{#if !isLoaded}
+  <!-- Loading Screen -->
+  <div bind:this={loadingScreen} class="loading-screen" aria-hidden="true">
+    <div class="loading-inner">
+      <div class="loading-logo">MP</div>
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
     </div>
   </div>
-</div>
+{/if}
 
 <!-- Page Curtain (transition) -->
 <div bind:this={curtain} class="page-curtain" aria-hidden="true"></div>
@@ -127,6 +130,7 @@
     <Hero />
     <Marquee />
     <FeaturedWorks on:openCaseStudy={openCaseStudy} />
+    <CreativeArsenal />
     <Contact />
   </main>
 {/if}

@@ -3,7 +3,6 @@
   import * as THREE from 'three';
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  import { SplitText } from 'gsap/SplitText';
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -54,7 +53,7 @@
     scene.add(group);
 
     // Geometria principal: Icosaedro Wireframe
-    const geoMain = new THREE.IcosahedronGeometry(1.1, 4);
+    const geoMain = new THREE.IcosahedronGeometry(1.1, 2); // Reduzido de 4 para 2
     const matMain = new THREE.MeshStandardMaterial({
       color: 0x4fc3f7,
       wireframe: true,
@@ -76,7 +75,7 @@
     group.add(meshInner);
 
     // Partículas ao redor
-    const particleCount = isMobile ? 40 : 120;
+    const particleCount = isMobile ? 30 : 70; // Reduzido para performance
     const positions = new Float32Array(particleCount * 3);
     for (let i = 0; i < particleCount; i++) {
       const radius = 1.8 + Math.random() * 1.4;
@@ -186,9 +185,10 @@
   }
 
   function animateEntrance() {
-    const tl = gsap.timeline({ delay: 1.4 });
+    const tl = gsap.timeline({ delay: 0.8 });
 
     // Título linha por linha (letras em máscara de overflow)
+    // Usamos .hero-title-line que já está dentro de .title-mask (overflow: hidden)
     tl.from('.hero-tag', {
       opacity: 0,
       y: 20,
@@ -196,9 +196,9 @@
       ease: 'power3.out'
     })
     .from('.hero-title-line', {
-      y: '110%',
-      duration: 1,
-      stagger: 0.12,
+      y: '100%',
+      duration: 1.2,
+      stagger: 0.15,
       ease: 'expo.out'
     }, '-=0.3')
     .from('.hero-subtitle', {
@@ -443,6 +443,12 @@
     letter-spacing: -0.02em;
     line-height: 0.92;
     margin-bottom: 32px;
+  }
+
+  /* Garantir que a linha seja um bloco para o transform funcionar */
+  .hero-title-line {
+    display: inline-block;
+    will-change: transform;
   }
 
   .accent-line .hero-title-line {

@@ -191,11 +191,21 @@
       <p class="cs-label reveal">04 — TELAS & WIREFRAMES</p>
       <h3 class="cs-sh reveal">Estrutura Visual</h3>
       <div class="cs-wireframes stagger">
-        {#each ['Tela Principal', 'Detalhe', 'Conversão'] as label, i}
-          <div class="cs-wf" style="--a: {project.accent}">
+        {#each (project.wireframes || [{ num: '01', label: 'Tela Principal' }, { num: '02', label: 'Detalhe' }, { num: '03', label: 'Conversão' }]) as item, i}
+          <div class="cs-wf {item.video ? 'has-video' : ''}" style="--a: {project.accent}">
             <div class="cs-wf-inner">
-              <span class="cs-wf-num">0{i + 1}</span>
-              <span class="cs-wf-label">{label}</span>
+              {#if item.video}
+                <div class="cs-wf-video-wrap">
+                  <video src={item.video} autoplay muted loop playsinline class="cs-wf-video"></video>
+                  <div class="cs-wf-video-overlay">
+                    <span class="cs-wf-num">{item.num}</span>
+                    <span class="cs-wf-label">{item.label}</span>
+                  </div>
+                </div>
+              {:else}
+                <span class="cs-wf-num">{item.num}</span>
+                <span class="cs-wf-label">{item.label}</span>
+              {/if}
             </div>
           </div>
         {/each}
@@ -650,7 +660,21 @@
     font-size: 10px;
     letter-spacing: 0.25em;
     color: var(--text-muted);
+    text-align: center;
+    padding: 0 10px;
   }
+
+  /* Video support in Case Study wireframes */
+  .cs-wf.has-video { height: auto; aspect-ratio: 9/16; }
+  .cs-wf-video-wrap { position: relative; width: 100%; height: 100%; }
+  .cs-wf-video { width: 100%; height: 100%; object-fit: cover; }
+  .cs-wf-video-overlay {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 12px; background: rgba(8,10,14,0.4);
+    transition: opacity 0.3s;
+  }
+  .cs-wf:hover .cs-wf-video-overlay { opacity: 0; }
 
   /* ── Next project ── */
   .cs-next-section {

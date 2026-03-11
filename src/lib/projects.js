@@ -52,7 +52,12 @@ export const projects = [
       { label: 'Realizável', items: ['Modelos IA customizados', 'Workflow automatizado', 'Controle de qualidade'] }
     ],
     principles: ['Impacto', 'Velocidade', 'Consistência', 'Escala', 'Qualidade'],
-    flowText: 'O processo criativo combina prompts estratégicos, modelos IA customizados e revisão humana para garantir criativos que performam e representam fielmente a identidade da marca.'
+    flowText: 'O processo criativo combina prompts estratégicos, modelos IA customizados e revisão humana para garantir criativos que performam e representam fielmente a identidade da marca.',
+    wireframes: [
+      { num: '01', label: 'Estratégia · Lair Ribeiro', video: '/images/Lair Ribeiro.mp4' },
+      { num: '02', label: 'Criatividade' },
+      { num: '03', label: 'Conversão' }
+    ]
   },
   {
     id: 3,
